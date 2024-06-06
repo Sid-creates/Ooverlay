@@ -51,57 +51,17 @@ c.execute('''
     )
 ''')
 
-
-#------------------------------------------------------------#
-# Insert sample data into MasterTasks table
+# Create Repeating tasks table, type is either daily, weekly(mon,tue,wed,thu,fri), monthly(01,31), or yearly(01-01, 12-31) repeating on date
 c.execute('''
-    INSERT INTO MasterTasks (name, description, priority, completed, sessions, due_date, frequency)
-    VALUES ('Task 2', 'Description 2', 'Medium', 0, 'Session 2', '2022-01-03', 'Weekly')
+    CREATE TABLE RepeatingTasks (
+        id INTEGER PRIMARY KEY,
+        frequency TEXT,
+        time TEXT,
+        duration INTEGER
+    )
 ''')
 
-c.execute('''
-    INSERT INTO MasterTasks (name, description, priority, completed, sessions, due_date, frequency)
-    VALUES ('Task 3', 'Description 3', 'Low', 0, 'Session 3', '2022-01-05', 'Monthly')
-''')
 
-# Insert sample data into SubTasks table
-c.execute('''
-    INSERT INTO SubTasks (masterTaskId, name)
-    VALUES (2, 'Subtask 2')
-''')
-
-c.execute('''
-    INSERT INTO SubTasks (masterTaskId, name)
-    VALUES (2, 'Subtask 3')
-''')
-
-c.execute('''
-    INSERT INTO SubTasks (masterTaskId, name)
-    VALUES (3, 'Subtask 4')
-''')
-
-c.execute('''
-    INSERT INTO SubTasks (masterTaskId, name)
-    VALUES (3, 'Subtask 5')
-''')
-# Insert sample data into Objective Tasks table
-
-c.execute('''
-    INSERT INTO Objectives (subTaskId, name)
-    VALUES (1, 'Objective 1')
-''')
-
-c.execute('''
-    INSERT INTO Objectives (subTaskId, name)
-    VALUES (1, 'Objective 2')
-''')
-# Insert sample data into sessions table
-c.execute('''
-    INSERT INTO Sessions (subTaskId, dateTime, duration)
-    VALUES (1, '2022-01-03 10:00:00', 60)
-''')
-
-#------------------------------------------------------------#
 
 # Save (commit) the changes
 conn.commit()
