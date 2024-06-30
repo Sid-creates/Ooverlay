@@ -29,3 +29,6 @@ This project aims to develop a Tkinter overlay application that helps users keep
 
 ## Conclusion
 The Tkinter Task Tracker and Alarm Overlay project aims to provide users with a convenient and efficient way to manage their tasks and set alarms. By combining task management features with alarm functionality, the overlay will help users stay organized and never miss important deadlines or appointments.
+
+DEV NOTES
+Swapped to Kivy to allow android use in future

@@ -7,7 +7,6 @@ from kivy.uix.widget import Widget
 from kivy.config import Config
 from kivy.core.window import Window
 from screeninfo import get_monitors
-from calendar import monthrange
 
 # Get screen size
 monitor = get_monitors()[0]
@@ -20,14 +19,7 @@ class Calendar(GridLayout):
     def __init__(self, **kwargs):
         super(Calendar, self).__init__(**kwargs)
         self.cols = 7
-        self.update_calendar(2022, 'January')
-
-    def update_calendar(self, year, month):
-        self.clear_widgets()  # Remove existing buttons
-        month_number = {'January': 1, 'February': 2, 'March': 3, 'April': 4, 'May': 5, 'June': 6,
-                        'July': 7, 'August': 8, 'September': 9, 'October': 10, 'November': 11, 'December': 12}[month]
-        days_in_month = monthrange(year, month_number)[1]
-        for i in range(1, days_in_month + 1):
+        for i in range(1, 31):
             btn = Button(text=str(i))
             self.add_widget(btn)
 
@@ -40,34 +32,26 @@ class MyApp(App):
         Window.left = 2 * (width // 3)
         
         layout = BoxLayout(orientation='vertical')
-        self.calendar = Calendar(size_hint=(1, 0.33))
+        calendar = Calendar(size_hint=(1, 0.33))
         spacer = Widget()
         
-        self.year_spinner = Spinner(
+        year_spinner = Spinner(
             text='2022',
-            values=[str(i) for i in range(2022, 2030)],
+            values=[str(i) for i in range(2000, 2030)],
             size_hint=(1, 0.1)
         )
-        self.month_spinner = Spinner(
+        month_spinner = Spinner(
             text='January',
             values=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             size_hint=(1, 0.1)
         )
         
-        self.year_spinner.bind(text=self.update_calendar)
-        self.month_spinner.bind(text=self.update_calendar)
-        
-        layout.add_widget(self.year_spinner)
-        layout.add_widget(self.month_spinner)
-        layout.add_widget(self.calendar)
+        layout.add_widget(year_spinner)
+        layout.add_widget(month_spinner)
+        layout.add_widget(calendar)
         layout.add_widget(spacer)
         
         return layout
-
-    def update_calendar(self, instance, value):
-        year = int(self.year_spinner.text)
-        month = self.month_spinner.text
-        self.calendar.update_calendar(year, month)
 
 if __name__ == '__main__':
     MyApp().run()
