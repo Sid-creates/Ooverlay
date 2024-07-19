@@ -4,8 +4,10 @@ from kivy.uix.button import Button
 from kivy.config import Config
 from kivy.core.window import Window
 from screeninfo import get_monitors
+
 # Import the helper function
 from Calendar.custom_calendar import get_custom_calendar
+from Timeline.custom_timeline import get_custom_timeline
 
 # Assuming get_monitors() is defined elsewhere and works as expected
 monitor = get_monitors()[0]
@@ -18,6 +20,7 @@ class MyApp(App):
     def build(self):
         # Set the size of the window
         Window.size = (width // 3, height)
+
         # Set the position of the window to the right third of the screen
         Window.top = 0
         Window.left = 2 * (width // 3)
@@ -29,10 +32,13 @@ class MyApp(App):
         calendar = get_custom_calendar()
         layout.add_widget(calendar)
 
-        # Create and add the remaining buttons to the layout
-        for i in range(2):  # Adjusted range since we're adding one less button
-            button = Button(text=f'Button {i+2}')  # Adjusted button text to start from 2
-            layout.add_widget(button)
+        # Use the helper function to add the custom calendar widget
+        timeline = get_custom_timeline()
+        layout.add_widget(timeline)
+
+        # Use the helper function to add the custom task display widget, currently spacer buttons
+        button = Button(text=f'Button 3') 
+        layout.add_widget(button)
 
         return layout
 
