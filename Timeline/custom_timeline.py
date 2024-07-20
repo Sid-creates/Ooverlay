@@ -1,4 +1,5 @@
 # custom_timeline.py
+from kivy.uix.button import Button 
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -16,20 +17,25 @@ class CustomTimelineWidget(BoxLayout):
             self.border_line = Line(rectangle=(self.x, self.y, self.width, self.height), width=2)
 
         scroll_view = ScrollView(do_scroll_x=False, do_scroll_y=True)
-
         self.bind(pos=self.update_border, size=self.update_border)
 
         # Day of the week row
         self.day_of_week_row = GridLayout(cols=7, size_hint=(1, 0.1))
-
         days_of_week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         for day in days_of_week:
             day_label = Label(text=day)
             self.day_of_week_row.add_widget(day_label)
 
-        scroll_view.add_widget(self.day_of_week_row) ## chng this
+        # Day columns
+        self.day_columns = GridLayout(cols=7, size_hint=(1, 0.9))
+        for _ in range(7):
+            day_button = Button(text="Add Event")
+            self.day_columns.add_widget(day_button)
+
+        scroll_view.add_widget(self.day_columns)
 
         # Add the ScrollView to the main layout
+        self.add_widget(self.day_of_week_row)
         self.add_widget(scroll_view)
 
     def update_border(self, *args):
