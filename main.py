@@ -34,7 +34,7 @@ class MyApp(App):
 
         # Use the helper function to add the custom calendar widget
         timeline = get_custom_timeline()
-        layout.add_widget(timeline)
+        layout.add_widget(timeline)   
 
         # Use the helper function to add the custom task display widget, currently spacer buttons
         button = Button(text=f'Button 3') 

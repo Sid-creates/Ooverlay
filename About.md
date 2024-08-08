@@ -33,3 +33,11 @@ The Tkinter Task Tracker and Alarm Overlay project aims to provide users with a 
 DEV NOTES
 Swapped to Kivy to allow android use in future,
 db should have upto day resolution, with if time given it is fixed else the ai can reorg the sessions within the day, only user can shift task from one day to another
+
+Need to place the day offset per month
+Need to create day table that holds events - call 30 of these from the db -  
+
+Time line
+
+Time - days
+times - buttons
